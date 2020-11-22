@@ -1,0 +1,3 @@
+[submodule "secretapi"]
+	path = secretapi
+	url = https://github.com/moorescloud/secretapi
