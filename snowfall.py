@@ -7,7 +7,6 @@ __version__ = '1.01.dev'
 __license__ = 'MIT'
 
 import sys, os, time, threading, logging, random
-import settings
 from secretapi.holidaysecretapi import HolidaySecretAPI
 
 class Twinkler(threading.Thread):
@@ -32,7 +31,7 @@ class Twinkler(threading.Thread):
 	def insert_match(self, msg):
 		th = [0, msg] # Array containing position and message
 		self.matches.append(th)
-		printme("depth %d" % len(self.matches))
+		printme('depth %d' % len(self.matches))
 
 	def run(self):
 		while True:
@@ -72,7 +71,7 @@ class Twinkler(threading.Thread):
 			try:
 				self.hol.render()
 			except:
-				printme("Something failed on the send, not to worry...")
+				printme('Something failed on the send, not to worry...')
 			time.sleep(0.05) # 20hz twinkles
 
 def printme(str):
@@ -89,7 +88,7 @@ if __name__ == '__main__':
 	elif 'HOLIDAY_ADDRESS' in os.environ:
 		holiday_address = os.environ.get('HOLIDAY_ADDRESS')
 	else:
-		print 'Holiday address required'
+		print('Holiday address required')
 		sys.exit(1)
 
 	# Startup the twinkler process

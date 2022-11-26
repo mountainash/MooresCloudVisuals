@@ -15,7 +15,6 @@ __license__ = ''
 # The fetch interval is defined in fetch_cpu_vals.
 
 import os, psutil, time, sys, threading
-import settings
 from secretapi.holidaysecretapi import HolidaySecretAPI
 
 class HCMapp(threading.Thread):
@@ -95,7 +94,7 @@ if __name__ == '__main__':
 	elif 'HOLIDAY_ADDRESS' in os.environ:
 			holiday_address = os.environ.get('HOLIDAY_ADDRESS')
 	else:
-		print 'Holiday address required'
+		print('Holiday address required')
 		sys.exit(1)                				# If not there, fail
 
 	app = HCMapp()						# Instance thread & start it
