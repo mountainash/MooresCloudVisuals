@@ -7,8 +7,7 @@ __version__ = '1.01.dev'
 __license__ = 'unlicense'
 
 import sys, os, time, threading, logging, random
-import settings
-from secretapi.holidaysecretapi
+from secretapi.holidaysecretapi import HolidaySecretAPI
 
 class Spin(threading.Thread):
 	"""Moves along the lights"""
@@ -22,7 +21,7 @@ class Spin(threading.Thread):
 		self.b = 0
 
 		# Define a light [red, green, blue, opacity]
-		self.lights =
+		# self.lights = [255, 255, 255, 1]
 
 		# Initialize the light holder
 		self.twinklevals = [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
@@ -47,7 +46,7 @@ class Spin(threading.Thread):
 						m = 0.5
 
 				(ar, ag, ab) = self.hol.getglobe(pos) # Get the current globe value
-				print(ar, ag, ab)
+				# print(ar, ag, ab)
 				rv = ar + m
 				gv = ag + m
 				bv = ab + m
@@ -55,9 +54,11 @@ class Spin(threading.Thread):
 				self.twinklevals[pos] = m
 				pos = pos + 1
 
-			self.hol.render()
+			try:
+				self.hol.render()
+			except:
+				printme('Something failed on the send, not to worry...')
 			time.sleep(0.05)  # 20hz twinkles
-			time.sleep(1.05) # 20hz twinkles
 
 			# # Now go through and animate the matches
 			# for thingy in self.matches:
@@ -84,7 +85,7 @@ if __name__ == '__main__':
 	elif 'HOLIDAY_ADDRESS' in os.environ:
 		holiday_address = os.environ.get('HOLIDAY_ADDRESS') # get the address from the .env file
 	else:
-		print 'Holiday address required'
+		print('Holiday address required')
 		sys.exit(1) # fail
 
 	hol = HolidaySecretAPI(addr=holiday_address)

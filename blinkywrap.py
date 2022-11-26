@@ -7,7 +7,6 @@ __version__ = '1.0.0'
 __license__ = 'unlicense'
 
 import sys, os, time, subprocess
-import settings
 
 if __name__ == '__main__':
 
@@ -16,10 +15,10 @@ if __name__ == '__main__':
 	elif 'HOLIDAY_ADDRESS' in os.environ:
 		holiday_address = os.environ.get('HOLIDAY_ADDRESS')
 	else:
-		print 'Holiday address required'
+		print('Holiday address required')
 		sys.exit(1) # If not there, fail
 
-	subprocess.Popen(['python', 'secretapi/blinky.py', holiday_address])
+	subprocess.Popen(['python3', 'secretapi/blinky.py', holiday_address])
 
 	while True:
 		try:
